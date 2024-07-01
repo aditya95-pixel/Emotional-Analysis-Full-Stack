@@ -1,0 +1,174 @@
+/* styles.css */
+
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color:whitesmoke;
+    background-image: url('bg2.png');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    color:white;
+}
+
+/* Header styles */
+header {
+    background-image: url('bg2.png');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-color:black;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Hero section styles */
+#hero {
+    background-color:black;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Features section styles */
+#features {
+    padding: 35px 20px;
+}
+
+.feature {
+    margin-bottom: 30px;
+}
+
+.feature h3 {
+    color: #007bff;
+}
+
+/* How It Works section styles */
+#how-it-works {
+    background-image: url('bg2.png');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    padding: 60px 10px;
+}
+
+#how-it-works ol {
+    margin-left: 20px;
+}
+
+#how-it-works ol li {
+    margin-bottom: 10px;
+}
+
+/* Testimonials section styles */
+#testimonials {
+    padding: 50px 20px;
+}
+
+.testimonial {
+    margin-bottom: 30px;
+}
+
+/* Contact section styles */
+#contact {
+    background-color:black;
+    color: #fff;
+    text-align: center;
+    padding: 50px 10px;
+}
+
+#contact form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#contact form input,
+#contact form textarea,
+#contact form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#contact form input[type="text"],
+#contact form input[type="email"],
+#contact form textarea {
+    background-color: #fff;
+}
+
+#contact form button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#contact form button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer styles */
+footer {
+    background-color:black;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer ul {
+    list-style-type: none;
+}
+
+footer ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}

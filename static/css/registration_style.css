@@ -1,0 +1,70 @@
+/* registration_style.css */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    background: black;
+    background-image: url('bg2.png');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+  }
+
+/* Container styles */
+h1 {
+    text-align: center;
+    color:white;
+}
+
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color:transparent;
+    padding:20px;
+    border-radius: 5px;
+
+}
+
+/* Input styles */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color:white;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color:transparent;
+    color:white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid white;
+    font-size: 18px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
