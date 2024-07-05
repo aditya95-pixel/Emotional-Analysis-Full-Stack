@@ -10,7 +10,10 @@ urlpatterns = [
     path('tools/', views.tools, name='tools'),
     path('text_analysis/', views.text_analysis, name='text_analysis'),
     path('voice_analysis/', views.voice_analysis, name='voice_analysis'),
-    path('live_video_analysis/', views.live_video_analysis, name='live_video_analysis'),
+    path('upload/', views.upload_image, name='upload_image'),
+    path('image_analysis/', views.image_analysis, name='image_analysis'),
     path('', views.index, name='index'),
 ]
+
+
 
