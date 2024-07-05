@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload with CSRF Token</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .upload-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #emotionResult {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h2>Image Upload</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="imageFile" name="imageFile" accept="image/*" required>
+            {% csrf_token %}
+            <button type="submit">Upload Image</button>
+        </form>
+        <div id="message"></div>
+        <div id="emotionResult"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('uploadForm');
+            const message = document.getElementById('message');
+            const emotionResult = document.getElementById('emotionResult');
+
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch('{% url "upload_image" %}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken')
+                        }
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        message.textContent = 'Image uploaded successfully!';
+                        emotionResult.textContent = `Detected Emotion: ${result.emotion}`;
+                    } else {
+                        message.textContent = result.error || 'Failed to upload image.';
+                        emotionResult.textContent = ''; // Clear emotion result on error
+                    }
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    message.textContent = 'Failed to upload image. Please try again.';
+                    emotionResult.textContent = ''; // Clear emotion result on error
+                }
+            });
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.startsWith(name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
+</body>
+</html>
