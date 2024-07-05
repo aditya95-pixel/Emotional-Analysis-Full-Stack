@@ -7,9 +7,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import os
-from keras.models import load_model
 import pandas as pd
 import joblib
+from django.views.decorators.csrf import ensure_csrf_cookie
+import numpy as np
+import cv2
+from deepface import DeepFace 
 # Load the Keras model
 pipe_lr = joblib.load(open("emote_app/emotion_classifier_pipe_lr.pkl", "rb"))
 @csrf_exempt
@@ -40,10 +43,33 @@ def text_analysis(request):
         return JsonResponse({'message': 'Text received', 'text': string})
     return render(request, 'text_analysis.html')
 
+@ensure_csrf_cookie
+def image_analysis(request):
+    return render(request, 'image_analysis.html')
 
 
-def live_video_analysis(request):
-    return render(request, 'live_video_analysis.html')
+def upload_image(request):
+    if request.method == 'POST':
+        # Handle the image upload logic here
+        image_file = request.FILES.get('imageFile')
+        if image_file:
+            # Convert the uploaded image file to a format OpenCV can use
+            nparr = np.fromstring(image_file.read(), np.uint8)
+            img1 = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            
+            # Analyze the image using DeepFace library
+            result = DeepFace.analyze(img1, actions=['emotion'])
+            
+            # Prepare response JSON with the analyzed emotion
+            response_data = {
+                'message': 'Image uploaded and analyzed successfully.',
+                'emotion': result[0]['dominant_emotion']
+            }
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({'error': 'No image file received.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 def tools(request):
     return render(request, 'tools.html')
